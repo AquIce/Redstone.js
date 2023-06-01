@@ -1,6 +1,10 @@
 const { Component } = require('./Component')
 
 class RedstoneBlock extends Component {
+
+    is_mutable = false
+    is_spread = false
+
     constructor() {
         super()
         this.intensity = 15

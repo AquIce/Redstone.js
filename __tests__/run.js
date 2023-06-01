@@ -9,7 +9,7 @@ show = (component) => {
 }
 
 let rd = [
-    new Redstone(),
+    new RedstoneBlock(),
     new Redstone(),
     new Redstone(),
     new Redstone(),
