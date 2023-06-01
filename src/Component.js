@@ -13,8 +13,7 @@ class Component {
     }
 
     link = (component) => {
-        this.links.push(component)
-        component.links.push(this)
+        this.links.push([component, true])
     }
 }
 

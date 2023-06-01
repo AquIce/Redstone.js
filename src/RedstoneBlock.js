@@ -12,8 +12,8 @@ class RedstoneBlock extends Component {
 
     spread = (source) => {
         for(let i = 0; i < this.links.length; i++) {
-            this.links[i].intensity = 15
-            this.links[i].spread(this)
+            this.links[i][0].intensity = 15
+            this.links[i][0].spread(this)
         }
     }
 }

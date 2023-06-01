@@ -18,13 +18,18 @@ class Repeater extends Component {
 
     spread = (source) => {
         for(let i = 0; i < this.links.length; i++) {
-            if(this.links[i] != source && this.links[i].is_mutable) {
-                if(this.intensity != 0 && this.intensity > this.links[i].intensity) {
-                    this.links[i].intensity = this.intensity - 1 > 0 ? this.intensity - 1 : 0
+            if(this.links[i][0] != source && this.links[i][0].is_mutable) {
+                if(this.intensity != 0 && this.intensity > this.links[i][0].intensity) {
+                    this.links[i][0].intensity = this.intensity - 1 > 0 ? this.intensity - 1 : 0
                 }
-                this.links[i].spread(this)
+                this.links[i][0].spread(this)
             }
         }
+    }
+
+    link = (component) => {
+        if(this.links.length === 0) { this.links.push([component, true]) }
+        else { this.links.push([component, false]) }
     }
 }
 
