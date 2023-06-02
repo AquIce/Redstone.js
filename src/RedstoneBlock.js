@@ -2,8 +2,7 @@ const { Component } = require('./Component')
 
 class RedstoneBlock extends Component {
 
-    is_mutable = false
-    is_spread = false
+    is_mutable = (source) => { return false }
 
     constructor() {
         super()
@@ -12,8 +11,10 @@ class RedstoneBlock extends Component {
 
     spread = (source) => {
         for(let i = 0; i < this.links.length; i++) {
-            this.links[i][0].intensity = 15
-            this.links[i][0].spread(this)
+            if(this.links[i].is_mutable(this)) {
+                this.links[i].intensity = 15
+                this.links[i].spread(this)
+            }
         }
     }
 }

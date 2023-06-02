@@ -1,33 +1,27 @@
-const { RedstoneBlock } = require('../src/RedstoneBlock')
-
-const IMMUTABLE_COMPONENTS = [
-    RedstoneBlock,
-]
-
 list_link = (list) => {
     for(let i = 0; i < list.length - 1; i++) {
         if(list[i].link(list[i + 1])) {
-            list[i].dest = list[i + 1]
+            console.log(list[i])
+            list[i].src = list[i - 1]
         }
     }
     list[0].spread(null)
 }
 
-is_mutable = (component) => {
-    IMMUTABLE_COMPONENTS.forEach(im => {
-        if(component instanceof im) { return false; }
-    });
-    return true;
+tab_link = (tab, start_index=[]) => {
+    if(start_index === []) {
+        tab.find(row => ![null,undefined].includes(row[0]))
+    }
 }
 
 find_update_needed_component = (first_component, before=null) => {
     if(first_component.links.length > 0) {
         first_component.links.forEach(link => {
-            if(link[0] != before) {
-                if(link[0].intensity - first_component.intensity > 1) {
+            if(link != before) {
+                if(link.intensity - first_component.intensity > 1) {
                     console.log(first_component)
-                    link[0].spread(null)
-                } find_update_needed_component(link[0], first_component)
+                    link.spread(null)
+                } find_update_needed_component(link, first_component)
             }
         })
     }
@@ -39,6 +33,6 @@ run_list = (list) => {
 }
 
 module.exports = {
-    is_mutable,
     run_list,
+    tab_link,
 }

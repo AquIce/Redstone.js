@@ -13,8 +13,8 @@ class Component {
     }
 
     link = (component) => {
-        this.links.push([component, true])
-        component.links.push([this, true])
+        this.links.push(component)
+        component.links.push(this)
         return false
     }
 }
