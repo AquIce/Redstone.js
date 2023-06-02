@@ -1,7 +1,7 @@
 const { Redstone } = require('../src/Redstone')
 const { RedstoneBlock } = require('../src/RedstoneBlock')
 
-const { list_link } = require('../src/utils')
+const { run_list } = require('../src/utils')
 
 show = (component) => {
     if(component instanceof Redstone) { return 'Redstone : ' + component.intensity }
@@ -40,7 +40,7 @@ let rd = [
     new RedstoneBlock()
 ]
 
-list_link(rd)
+run_list(rd)
 
 rd.forEach(element => {
     console.log(show(element))
