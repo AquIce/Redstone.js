@@ -6,7 +6,9 @@ const IMMUTABLE_COMPONENTS = [
 
 list_link = (list) => {
     for(let i = 0; i < list.length - 1; i++) {
-        list[i].link(list[i + 1])
+        if(list[i].link(list[i + 1])) {
+            list[i].dest = list[i + 1]
+        }
     }
     list[0].spread(null)
 }
@@ -18,7 +20,25 @@ is_mutable = (component) => {
     return true;
 }
 
+find_update_needed_component = (first_component, before=null) => {
+    if(first_component.links.length > 0) {
+        first_component.links.forEach(link => {
+            if(link[0] != before) {
+                if(link[0].intensity - first_component.intensity > 1) {
+                    console.log(first_component)
+                    link[0].spread(null)
+                } find_update_needed_component(link[0], first_component)
+            }
+        })
+    }
+}
+
+run_list = (list) => {
+    list_link(list)
+    find_update_needed_component(list[0])
+}
+
 module.exports = {
-    list_link,
     is_mutable,
+    run_list,
 }

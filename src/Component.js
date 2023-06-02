@@ -14,6 +14,8 @@ class Component {
 
     link = (component) => {
         this.links.push([component, true])
+        component.links.push([this, true])
+        return false
     }
 }
 

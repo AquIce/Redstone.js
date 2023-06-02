@@ -4,6 +4,7 @@ const { is_mutable } = require('./utils')
 class Repeater extends Component {
     
     src = null
+    dest = null
     is_mutable = true
 
     constructor() {
@@ -14,6 +15,7 @@ class Repeater extends Component {
         this.links.push(component)
         component.links.push(this)
         this.src = component
+        return true
     }
 
     spread = (source) => {
@@ -30,6 +32,7 @@ class Repeater extends Component {
     link = (component) => {
         if(this.links.length === 0) { this.links.push([component, true]) }
         else { this.links.push([component, false]) }
+        component.links.push([this, false])
     }
 }
 
